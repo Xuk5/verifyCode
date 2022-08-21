@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div @click="changeCode">
 		<verifyCode :identifyCode="identifyCode"></verifyCode>
 	</div>
 </template>
@@ -25,11 +25,20 @@ export default {
 			for(let i = 0;i<len;i++){
 				this.identifyCode += data[this.randomNum(0,data.length-1)]
 			}
+		},
+		changeCode(){
+			this.identifyCode = ''
+			this.makeCode(this.identifyCodes,4)
 		}
 	},
 	mounted() {
 		this.identifyCode=''//初始化验证码
 		this.makeCode(this.identifyCodes,4)
+	},
+	watch:{
+		identifyCode(){
+			console.log(this.identifyCode)
+		}
 	}
 
 }
